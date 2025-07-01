@@ -8,22 +8,30 @@ function mostraPalavrasChave() {
    const palavras  = processaTexto (texto);
 
    campoResultado.textContent = palavrasChave.join(","); 
- }
-console.log(frequencias);
-return palavras;
+ 
 }
-function contaFrequencias(palavras){
-    
+
+function processaTexto(texto) {
+   let palavras = texto.split(/\P{L}+/l); 
+   const frequencias =contaFrequencias (palavras);
+   let ordenadas  = Object.keys(frequencias).sort(ordenaPalavra);
+
+   function ordenaPalavra(p1,p2){
+    return frequencias [p2] - frequencias[p1];
+   }               
+
+console.log(ordenadas);
+return ordenadas.slice(0,10);
 }
-function processaTexto(texto){
-   let palavras = texto.split(/\P{L}+/l);
-   contaFrequencias(palavras);
-   let frequencias = {;
+
+   Function contaFrequencias(palavras) {
+   let frequencias = {};
    for(let i of  palavras){
-       frequencias [i] =0;
-       for (let j of  palavras)
+       frequencias [i] = 0;
+       for (let j of  palavras){
            if (i==j){
                frequencias[i]++;
            }
        }
-   }
+    }
+}
